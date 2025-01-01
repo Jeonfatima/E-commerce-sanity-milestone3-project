@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import React from 'react'
 import { groq } from "next-sanity";
 import { client } from "@/sanity/lib/client"
@@ -6,7 +7,7 @@ import Image from 'next/image';
 import Last from '../components/Last';
 const Products = async () => {
 
-    const products = await client.fetch(groq`*[_type=="product"]`)
+       const products = await client.fetch(groq `*[_type=="product"]`)
 
 
     return (
@@ -59,10 +60,12 @@ const Products = async () => {
 
                     {/* products List */}
                     <div className=' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mt-6 '>
-                        {products.map((product: { id: string; name: string; price: number }, index: number) => (
+                        {products.map((product: any, index: number) => (
+                            // card
                             <Card key={index} product={product} />
-                        ))}
+                        ))
 
+                        }
                     </div>
 
                 </div>

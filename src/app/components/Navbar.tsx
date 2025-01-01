@@ -1,12 +1,14 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 "use client"
 import React, { useContext, useState } from 'react';
 import { BsCart } from "react-icons/bs";
 import Link from 'next/link';
 import Cart from './Cart';
-import { CartContext, CartContextType } from '../context/CartContext'; 
+import { CartContext } from '../context/CartContext'; 
 
 const Navbar = () => {
-  const { totalQuantity, showCart, setShowCart } = useContext(CartContext) as CartContextType;
+
+    const {totalQuantity, showCart, setShowCart}:any = useContext(CartContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleClick = () => {

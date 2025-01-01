@@ -1,108 +1,95 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 "use client"
-import React, { useContext, useState } from 'react'
-import Image from 'next/image'
+
 import { urlFor } from '@/sanity/lib/image'
-import {AiOutlineMinus} from 'react-icons/ai'
-import {AiOutlinePlus} from 'react-icons/ai'
-import { CartContext } from '../context/CartContext'
+import Image from 'next/image'
+import React, { useContext, useState } from 'react';
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
+import { CartContext } from '../context/CartContext';
+
 const ProductDetails = ({ product }: any) => {
-
-  const [index,setIndex] = useState(0);
-  // Check if product and product.images exist, default to an empty array if not
-  const images = product?.images ?? [];
-
-  const context = useContext(CartContext);
-
-if (!context) {
-  throw new Error("CartContext is not available");
-}
-
-const { cartItems, addProduct, qty, decQty, incQty } = context;
-
-  console.log(cartItems)
+  const [index, setIndex] = useState(0);
+  const { cartItems, addProduct, qty, decQty, incQty }: any = useContext(CartContext);
+  // console.log(cartItems);
 
   return (
-    <div className='product-details-section mb-[100px]'>
+    <div className='product-details-section'>
       <div className='product-details-container'>
-        {/* left section */}
+
+        {/* Left */}
         <div>
-          {/* top */}
+          {/* TOP */}
           <div className='h-[450px] flex items-center mb-[25px]'>
-            {images.length > 0 ? (
-              <Image
-                loader={() => urlFor(images[index]).url()} // Using the first image safely
-                src={urlFor(images[index]).url()}
-                alt={images[index]?.alt || 'Product Image'}
-                width={350}
-                height={350}
-                className='object-cover mx-auto'
-              />
-            ) : (
-              <p>No image available</p> // Fallback if there are no images
-            )}
+            <Image
+              loader={() => urlFor(product.images[index]).url()}
+              src={urlFor(product.images[index]).url()}
+              alt={product.images[index]}
+              width={350}
+              height={350}
+              className='object-cover mx-auto'
+            />
           </div>
 
-          {/* bottom */}
+          {/* BOTTOM */}
           <div className='small-images-container'>
-            {images.length > 0 ? (
-              images.map((item: any, i: number) => (
-                <Image
-                  key={i}
-                  loader={() => urlFor(images[i]).url()} // Using the first image safely
-                  src={urlFor(images[i]).url()}
-                  alt={images[i]?.alt || 'Product Image'}
-                  width={220}
-                  height={100}
-                  className='object-cover h-32 mx-auto border rounded-xl hover:cursor-pointer'
-                  onClick={()=>setIndex(i)}
-                />
-              ))
-            ) : (
-              <p>No additional images available</p> // Fallback if there are no additional images
-            )}
+            {product.images?.map((item: any, i: number) => (
+              <Image
+                key={i} // Add a unique key here
+                loader={() => urlFor(product.images[i]).url()}
+                src={urlFor(product.images[i]).url()}
+                alt={product.images[i]?.alt || 'Product Image'}
+                width={220}
+                height={100}
+                className="object-cover h-32 mx-auto border rounded-xl hover:cursor-pointer"
+                onClick={() => setIndex(i)}
+              />
+            ))}
+
+
+
           </div>
         </div>
-        {/* left section end  */}
 
 
-
-        {/* right section */}
+        {/* Right */}
         <div className='flex flex-col gap-8 md:pt-32 pt-0'>
-        <div className='flex flex-col gap-4'>
-            {/* Safely access product properties */}
-            <div className='text-3xl font-bold'>{product?.name || 'Unnamed Product'}</div>
-            <div className='text-xl font-medium '>${product?.price || '0.00'}</div>
-            <div className='text-xl text-gray-700'>{product?.description || 'No description available'}</div>
+          <div className='flex flex-col gap-4'>
+            <div className='text-3xl font-bold'>{product.name}</div>
+            <div className='text-xl font-medium'>{product.price}</div>
           </div>
-              
 
-              <div className='flex gap-2 items-center'>
-                   <h3>Quantity</h3>
-                   <p className='quantity-desc flex items-center border-black'>
-                       <span className='minus' onClick={decQty}>
-                               <AiOutlineMinus/>
-                       </span>
-                       <span className='num'>
-                              {qty}
-                       </span>
-                       <span className='plus' onClick={incQty}>
-                               <AiOutlinePlus/>
-                       </span>
-                   </p>
-              </div>
-                
-                <button className='btn add-to-cart' onClick={()=>addProduct(product,qty)}>
-                  Add to cart
-                </button>
+          <div className='flex gap-2 items-center'>
+            <h3>Quantity</h3>
+            <p className='quantity-desc flex items-center border-black'>
+              <span className='minus'
+                onClick={decQty}
+              >
+                <AiOutlineMinus />
+              </span>
+              <span className='num'>{qty}</span>
+              <span className='plus'
+                onClick={incQty}
+              >
+                <AiOutlinePlus />
+              </span>
+
+            </p>
+          </div>
+
+          <button className='btn add-to-cart'
+            onClick={() => addProduct(product, qty)}
+          >
+            Add To Cart
+          </button>
+
 
         </div>
-        {/* right scetion ended */}
-
-
 
       </div>
-    </div>
-  );
-};
 
-export default ProductDetails;
+
+    </div>
+  )
+}
+
+export default ProductDetails
