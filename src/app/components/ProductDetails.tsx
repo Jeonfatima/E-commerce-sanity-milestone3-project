@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
 import {AiOutlineMinus} from 'react-icons/ai'
 import {AiOutlinePlus} from 'react-icons/ai'
-import { CartContext , CartContextType} from '../context/CartContext'
+import { CartContext } from '../context/CartContext'
 const ProductDetails = ({ product }: any) => {
 
   const [index,setIndex] = useState(0);
