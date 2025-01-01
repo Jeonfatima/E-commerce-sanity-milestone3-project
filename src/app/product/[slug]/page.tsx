@@ -6,28 +6,38 @@ import React, { useEffect, useState } from 'react';
 import { groq } from "next-sanity";
 import { client } from "@/sanity/lib/client";
 
-const Page = () => {
-    const { slug }: any = useParams();
-    const [product, setProduct] = useState<any>(null);
+interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  images: { [key: string]: string }[];
+  slug: { current: string };
+}
 
-    // Fetch data inside useEffect
+const Page = () => {
+    const { slug } = useParams<{ slug: string }>(); // Typing slug
+    const [product, setProduct] = useState<Product | null>(null);
+
     useEffect(() => {
         const fetchProduct = async () => {
             const products = await client.fetch(groq`*[_type=="product"]`);
-            const foundProduct = products.find((product: any) => product.slug.current === slug);
-            console.log(foundProduct); // Logs only once
-            setProduct(foundProduct);
+            const foundProduct = products.find((product: Product) => product.slug.current === slug);
+            if (foundProduct) {
+                setProduct(foundProduct);
+            } else {
+                console.error("Product not found");
+            }
         };
 
         fetchProduct();
-    }, [slug]); // Dependency ensures fetch runs once when slug changes
+    }, [slug]);
 
+    if (!product) {
+        return <div>Loading...</div>; // Show loading state
+    }
 
-  return (
-    <div>
-        <ProductDetails product={product}/>
-    </div>
-  )
-}
+    return <ProductDetails product={product} />;
+};
 
-export default Page
+export default Page;

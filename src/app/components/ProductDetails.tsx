@@ -4,14 +4,21 @@ import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
 import {AiOutlineMinus} from 'react-icons/ai'
 import {AiOutlinePlus} from 'react-icons/ai'
-import { CartContext } from '../context/CartContext'
+import { CartContext , CartContextType} from '../context/CartContext'
 const ProductDetails = ({ product }: any) => {
 
   const [index,setIndex] = useState(0);
   // Check if product and product.images exist, default to an empty array if not
   const images = product?.images ?? [];
 
-  const{cartItems ,addProduct ,qty , decQty , incQty}:any = useContext(CartContext)
+  const context = useContext(CartContext);
+
+if (!context) {
+  throw new Error("CartContext is not available");
+}
+
+const { cartItems, addProduct, qty, decQty, incQty } = context;
+
   console.log(cartItems)
 
   return (

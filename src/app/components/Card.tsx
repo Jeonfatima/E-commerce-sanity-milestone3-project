@@ -1,16 +1,25 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import {urlFor} from '@/sanity/lib/image'
+import { urlFor } from '@/sanity/lib/image'
 
-const Card = ({ product }: { product: any }) => {
+// Define the Product type based on your schema
+type Product = {
+  name: string;
+  price: number;
+  slug: { current: string };
+  images: { url: string }[];
+  description: string;
+}
+
+const Card = ({ product }: { product: Product }) => {
   return (
     <div className="bg-white drop-shadow-md rounded-lg overflow-hidden w-[250px] h-[350px] flex flex-col justify-between">
       <Link href={`/product/${product.slug.current}`}>
         <div>
           <Image
             src={urlFor(product.images && product.images[0]).url()}
-            alt={product.slug}
+            alt={product.slug.current}
             width={220}
             height={220}
             className="object-contain w-[220px] h-[220px] mx-auto"
@@ -24,7 +33,7 @@ const Card = ({ product }: { product: any }) => {
         </div>
       </Link>
     </div>
-  )
+  );
 }
 
-export default Card
+export default Card;
