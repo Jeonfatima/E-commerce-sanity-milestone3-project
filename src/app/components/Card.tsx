@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {urlFor} from '@/sanity/lib/image'
 
-const Card = ({product}: any) => {
+const Card = ({ product }: { product: any }) => {
   return (
     <div className="bg-white drop-shadow-md rounded-lg overflow-hidden w-[250px] h-[350px] flex flex-col justify-between">
       <Link href={`/product/${product.slug.current}`}>

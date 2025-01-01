@@ -12,13 +12,13 @@ const Hero = () => {
         {/* Sidebar */}
         <aside className="lg:w-1/4 w-full bg-gray-100 p-6">
           <ul className="space-y-4">
-            <li className="cursor-pointer hover:underline">Woman's Fashion</li>
-            <li className="cursor-pointer hover:underline">Men's Fashion</li>
+            <li className="cursor-pointer hover:underline">Womans Fashion</li>
+            <li className="cursor-pointer hover:underline">Mens Fashion</li>
             <li className="cursor-pointer hover:underline">Electronics</li>
             <li className="cursor-pointer hover:underline">Home & Lifestyle</li>
             <li className="cursor-pointer hover:underline">Medicine</li>
             <li className="cursor-pointer hover:underline">Sports & Outdoor</li>
-            <li className="cursor-pointer hover:underline">Baby's & Toys</li>
+            <li className="cursor-pointer hover:underline">Babys & Toys</li>
             <li className="cursor-pointer hover:underline">Groceries & Pets</li>
             <li className="cursor-pointer hover:underline">Health & Beauty</li>
           </ul>

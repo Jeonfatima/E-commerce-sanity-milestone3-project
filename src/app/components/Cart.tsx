@@ -1,5 +1,5 @@
 import React , {useContext} from 'react'
-import { AiOutlineLeft, AiOutlineMinus,AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlineLeft } from 'react-icons/ai'
 import {TiDeleteOutline} from 'react-icons/ti'
 import { CartContext } from '../context/CartContext';
 import Image from 'next/image';
