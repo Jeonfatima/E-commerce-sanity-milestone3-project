@@ -12,6 +12,11 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      
+        fontFamily:{
+          'urbanist':["Urbanist","sans-serif"]
+        },
+      
     },
   },
   plugins: [],
